@@ -1,0 +1,37 @@
+<template name="spielAendern">
+      <form>
+        <div class="ui small form segment">
+            <label>{{spiel.spiel}} ändern:</label>
+            <input placeholder="Spiel" type="text" id="chgspiel" value="{{spiel.spiel}}">            
+            <label>Verlag</label>
+            <input placeholder="Verlag" type="text" id="chgverlag" value="{{spiel.verlag}}">
+        	  <label>Autor</label>
+            <input placeholder="Autor" type="text" id="chgautor" value="{{spiel.autor}}">    
+            <label>Quote</label>
+            <input placeholder="Quote" type="text" id="chgquote" value="{{spiel.quote}}">
+            <label>Wertung (aktiv, erfolg, niete, inaktiv, space)</label>            
+            <div class="ui selection dropdown">
+                <input name="wertung" id="chgwertung" type="hidden" value="{{spiel.wertung}}">
+                <div class="text">{{spiel.wertung}}</div>                
+                <i class="dropdown icon"></i>
+                  <div class="menu">
+                  <div class="item" data-value="inaktiv">inaktiv</div>
+                  <div class="item" data-value="aktiv">aktiv</div>                
+                  <div class="item" data-value="niete">niete</div>
+                  <div class="item" data-value="erfolg">erfolg</div>
+                </div>
+            </div>                  
+        </div>
+        <div class="chg">
+          <div class="black ui button">          
+            Ändern
+          </div>
+        </div>  
+        <div class="del">
+          <div class="negative ui button">          
+            Löschen
+          </div>
+        </div>        
+      </form>        
+</template>
+

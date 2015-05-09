@@ -1,0 +1,39 @@
+<template name="spiele">
+{{#if isInRole 'admin'}}
+    <div class="spielSuche">
+        <div class="ui input focus">
+            <input placeholder="Filter ..." class="search-query" type="text" id="spielFilter"> 
+        </div>
+    </div>
+	<div class="ui list">
+		{{#each spiele}}
+            {{#if active}}
+    			<div class="ui  {{wertungsFarbe}} inverted segment">
+                    <div class="item">
+    	       			<div class="content">
+        		      		<div class="header">{{spiel}}</div>
+                            Verlag:{{verlag}}, Autor:{{autor}}, Quote:{{quote}}:10, Gesamteinsatz:{{wetteGesamt}}, Wertung: {{wertung}} 
+        			    </div>
+      			    </div> 
+                </div> 
+    {{#if get_active}}
+        {{> spielAendern}}
+    {{/if}}                
+            {{else}}
+                <div class="ui  {{wertungsFarbe}} segment">
+                <div class="item">
+                    <div class="content">
+                        <div class="header">{{spiel}}</div>
+                        <div class="description">
+                            Verlag:{{verlag}}, Autor:{{autor}}, Quote:{{quote}}:10, Gesamteinsatz:{{wetteGesamt}}, Wertung: {{wertung}}
+                        </div>
+                    </div>
+                </div>         
+                </div>
+            {{/if}}             	
+    	{{/each}}    
+    </div>            
+    {{> spielAnlegen}}
+    {{> spielImport}}
+{{/if}}    
+</template>

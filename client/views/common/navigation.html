@@ -1,0 +1,45 @@
+<template name="navigation">  
+  <div class="ui fixed inverted main menu" id="nav123">  
+
+  {{#if isInRole 'admin'}}
+    <a class="{{activeRouteClass 'verlage'}} item" href="{{pathFor 'verlage'}}">
+      <i class="puzzle piece icon"></i> Verlage
+    </a>      
+    <a class="{{activeRouteClass 'scouts'}} item" href="{{pathFor 'scouts'}}">    
+      <i class="users icon" ></i> Scouts
+    </a>
+    <a class="{{activeRouteClass 'spiele'}} item" href="{{pathFor 'spiele'}}">    
+      <i class="gamepad icon" ></i> Spiele
+    </a>      
+    <a class="{{activeRouteClass 'check'}} item" href="{{pathFor 'check'}}">    
+      <i class="stethoscope icon" ></i> Check
+    </a>        
+    <a class="{{activeRouteClass 'auswerten'}} item" href="{{pathFor 'auswerten'}}">    
+      <i class="trophy icon" ></i> Auswerten
+    </a>    
+  {{/if}}
+  
+  {{#if isInRole 'wetter'}}
+    <a class="{{activeRouteClass 'wetten'}} item" href="{{pathFor 'wetten'}}">    
+      <i class="thumbs outline up icon"></i> Wetten
+    </a>
+  {{/if}}  
+  {{#if isInRole 'scout'}}
+    <a class="{{activeRouteClass 'noten'}} item" href="{{pathFor 'noten'}}">    
+      <i class="half empty star icon"></i> Noten
+    </a>      
+  {{/if}} 
+  {{#if currentUser}}
+    <a class="{{activeRouteClass 'suser'}} item" href="{{pathFor 'suser'}}">    
+      <i class="user icon"></i> User:
+    </a> 
+    <div class="item">      
+      {{> loginButtons}}          
+    </div>  
+  {{/if}}
+
+</div>  
+</template>
+
+
+

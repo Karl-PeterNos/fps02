@@ -1,0 +1,173 @@
+<template name='suser'>
+
+<div class="ui stackable very relaxed one column page grid">                        
+
+<div class="left aligned column">            
+
+<div class="ui segment">
+  <p>Herzlich willkommen zur Fairplay Buchmacheraktion. Bevor es los geht brauchen wir noch Ihre Abonummer und Ihren Namen. Dann bekommen Sie 2000 Fairplay Dollar. Der Rest geht ganz einfach: Sie wetten auf einige Nürnberger Neuheiten. Sie können in den nächsten Wochen Ihre Wetten auch noch beliebig ändern. Stück für Stück schalten wir aber einige Spiele ab. Dann lassen sich Wetten auf diese Spiele nicht mehr ändern. Am Ende der Aktion geben wir unser subjektives Ranking bekannt. Die Spiele in der oberen Hälfte gewinnen, die unteren 50% verlieren. </p>  
+  <p>Viel Spaß</p>
+  <p>P.S. Dies ist der erste Testlauf. Bei Erfolg der Aktion versuchen wir eine ähnliche Seite zur Eingabe der Scoutaktion in Essen zu nutzten und bauen die Nürnberger Quotentipps noch aus.</p>
+  <p>P.P.S. Bitte schickt uns Feedback jeder Art (Ideen, Fehler, Kritik oder was auch immer) per <a class="ui label" href="mailto:scoutaktion@fairplay-online.de">
+  <i class="mail icon"></i> Mail an scoutaktion@fairplay-online.de 
+	</a>.</p>
+
+</div>
+</div>        
+{{#if currentUser}}
+ <div class="left aligned column">            
+
+	<div class="ui labeled input">
+  		<div class="ui label">
+    		Abo Nr.
+  		</div>
+  		<input placeholder="Vor dem Wetten hier Abo Nr. eingeben" type="text" id="scoutId" value="{{scout.scoutId}}">	
+	</div>
+	<div class="ui yellow message">
+		<p>Die Abo Nummer wird momentan noch nicht überprüft - 1234 funktioniert immer
+		</p>
+	</div>
+</div>
+<div class="left aligned column">            
+	<div class="ui labeled input">
+  		<div class="ui label">
+    		Name
+  		</div>
+		<input placeholder="Vor dem Wetten hier Namen eingeben" type="text" id="scoutName" value="{{scout.scoutName}}">
+	</div>
+ 
+</div>
+	{{#if isInRole 'wetter'}}
+	<div class="center aligned column">            
+		<div class="massive ui button">
+		    <a class="{{activeRouteClass 'wetten'}} item" href="{{pathFor 'wetten'}}">    
+		      <i class="thumbs outline up icon"></i> Hier geht es zu den Wetten
+		    </a>		
+		</div>
+	</div>
+	{{/if}}	
+{{else}}
+<div class="left aligned column">    	
+	<div class="ui segment">
+		<p>Doch bitte loggen Sie sich zuerst ein. Wenn Sie noch keinen User haben können Sie einfach einen per Mail, Facebook, Google+ oder Twitter erstellen:
+		</p>
+		<p>
+		<div class="massive ui button">
+		{{> loginButtons}}
+		</div>
+		</p>		
+<div class="ui segment">
+  	<div class="ui negative message">
+	  <i class="close icon"></i>
+  	<div class="header">
+	    Logon per HTTPS mit google+ oder facebook funktioniert momentan nicht
+  	</div>
+  	<p>Es geht aber der Zugriff per HTTP:
+  		<a href="http://fps02.meteor.com">http://fps02.meteor.com</a>
+  	</p>
+  	<p>
+  		(oder Anmeldung per Twitter oder manuell)
+	</p>
+	</div>
+</div>		
+	</div>
+</div>
+{{/if}}
+</div>
+
+
+
+</template>
+
+
+<template name="scouts">
+
+{{#if isInRole 'admin'}}
+<div class="ui stackable very relaxed one column page grid">                        
+<div class="left aligned column"> 		
+
+
+	<table id="scoutTable" class="ui sortable table segment">
+		<thead>
+		  	<tr>
+			  	<th>Status</th>			  	
+			  	<th>Name</th>		  		
+			  	<th>Nationalität</th>	  	
+			  	<th>Abo Nummer/Scout Nummer</th>
+			  	<th>Budget</th>
+			  	<th>Gewettet</th>
+			  	<th>User</th>
+				<th>Rollen</th>			
+			</tr>
+		</thead>
+		<tbody class="scout">
+			{{#each user}}{{#with joinWithScout}}			
+			<tr class="{{scoutStatusClass}}">			
+				{{#if editing}}			
+					{{> scoutAendern}}							
+				{{else}}					
+				    	<td><i class="{{scoutStatusIcon}}"></i>{{scoutStatus}}</td>
+				    	<td>{{scoutName}}</td>
+				    	<td>{{scoutLand}}</td>		    	
+				    	<td>{{scoutId}}</td>
+				    	<td>{{scoutBudget}}</td>				    	
+			    {{/if}}	
+			    <td>{{scoutSpent}}</td>			    				
+			    <td>{{username}}</td>			    				
+				<td>{{rollen}}</td>				    
+			</tr>
+			{{/with}}{{/each}}		  
+		</tbody>
+	</table>
+</div>
+<div class="left aligned column">
+<div class="ui accordion">
+    <div class="title">
+      <i class="dropdown icon"></i>
+      Zurück zu Start
+    </div>
+    <div class="content">      	
+		<div class="negative ui button" id="scoutWettReset">Wetten Reset (alles auf 0)</div>
+    </div>
+  </div>
+|</div>
+</div>
+{{/if}}
+</template>
+
+<template name="scoutAendern"> 	
+	<td class="{{scoutStatusClass}}">
+		<div class="ui dropdown">
+			<div class="text">{{scoutStatus}}</div>
+				<i class="dropdown icon"></i>
+	  			<div class="menu">
+	    		<div class="item" data-value="neu">neu</div>
+	    		<div class="item" data-value="ext">ohne Abo</div>
+	    		<div class="item" data-value="abo">mit Abo</div>
+	    		<div class="item" data-value="chk">verdächtig</div>
+	    		<div class="item" data-value="blk">blockiert</div>
+	    		<div class="item" data-value="del">löschen</div>	    		
+	  		</div>
+		</div>
+	</td>
+	<td>
+		<div class="ui input">
+				<input placeholder="Name" type="text" id="scoutName" value="{{scoutName}}">
+		</div>
+	</td>
+	<td>
+		<div class="ui input">
+				<input placeholder="Land" type="text" id="scoutLand" value="{{scoutLand}}">
+		</div>
+	</td>
+	<td>
+		<div class="ui input">
+				<input placeholder="Abo/Scout Nr." type="text" id="scoutId" value="{{scoutId}}">
+		</div>		
+	</td>	
+	<td>
+		<div class="ui input">
+				<input placeholder="1000" type="text" id="scoutBudget" value="{{scoutBudget}}">
+		</div>		
+	</td>				
+</template>

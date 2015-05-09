@@ -1,0 +1,107 @@
+<template name="wetten">    
+
+<div class="ui stackable very relaxed one column page grid">                        
+        
+        <div class="left aligned column">            
+                {{> wettensuche}}   
+        </div>
+        <div class="left aligned column">            
+                {{> wettverbrauch}}            
+        </div>                
+
+        		{{#each spiele}}
+                        <div class="left aligned column">            
+                                <div class="ui large header">
+                                    {{spiel}}
+                                </div>                                
+                                {{#if currentUser}}
+                                {{#if isInRole 'wetter'}}                            
+                                    {{#with joinWithWette}}                              
+                                        {{#if editing}}
+                                            {{> wette}}  
+                                        {{else}}                                        
+                                            <div class="ui labeled icon button" title="Quote: Einschätzung der Fairplay, ob das Spiel ein Erfolg wird. Gesamt: Bisher von allen gesetzer Betrag auf den Erfolg des Spiels.">
+                                                <i class="{{aktivSpiel}} icon"></i>
+                                                Wette: 
+                                                {{getWette}}      
+                                                <div class="ui orange right ribbon label" >Quote {{quote}}:10, Gesamt {{wetteGesamt}}</div>
+                                            </div>                                
+                                        {{/if}}
+                                    {{/with}}            
+                                {{/if}}     
+                                {{/if}}                                                
+                                <div class="description">
+                                    {{verlag}}, {{autor}}
+                                </div>
+
+                        </div>  
+            	{{/each}}    
+            
+            {{#if moreResults}}
+                <div id="showMoreResults" style="margin-left: 25px;">
+                    <span class="loading">Loading...</span>
+                </div>
+            {{/if}}    
+
+</div>
+    
+</template>
+
+<template name="wettensuche">
+    <div class="wettenSuche">
+        <div class="ui input focus">
+            <input placeholder="Filter ..." class="search-query" type="text" id="wettenFilter" value="{{getFilter}}"> 
+        </div>
+    </div>
+</template>
+
+<template name="wettverbrauch">
+    
+    {{#if currentUser}}
+    {{#if isInRole 'wetter'}} 
+    <div class="ui statistic">
+      <div class="value">
+        <i class="ticket icon"></i> {{spent}}
+      </div>
+      <div class="label">
+        von {{budget}} von dir verwettet
+      </div>
+    </div>
+    <div class="ui statistic">
+      <div class="value">
+        <i class="users icon"></i> {{getGesamtWetter}}
+      </div>
+      <div class="label">
+        aktive Teilnehmer
+      </div>
+    </div> 
+    <div class="ui statistic">
+      <div class="value">
+        <i class="dollar icon"></i> {{getGesamtEinsatz}}
+      </div>
+      <div class="label">
+        von allen eingesetzt
+      </div>
+    </div>  
+    {{/if}}
+    {{else}}
+        <div class="massive ui button">
+        {{> loginButtons}}
+        </div>
+    {{/if}}
+
+</template>
+
+
+<template name="wette">    
+    <div>
+        <div class="ui large floating labeled input" title="Quote: Einschätzung der Fairplay, ob das Spiel ein Erfolg wird. Gesamt: Bisher von allen gesetzer Betrag auf den Erfolg des Spiels.">
+            <div class="ui red label">
+                <i class="legal icon"></i>Wette:
+            </div>
+            <input placeholder="Hier Wette eingeben" type="number" id="scoutWette" value="{{getWette}}">  
+            <div class="ui red floating label">Quote {{quote}}:10, Gesamt {{wetteGesamt}}</div>
+        </div>
+    
+    </div>
+</template>

@@ -1,0 +1,22 @@
+<template name="verlagAendern">
+      <form>
+        <div class="ui small form segment">
+          <div class="two fields">
+            <label>{{verlag.verlag}} ändern:</label>
+            <input placeholder="Verlag" type="text" id="chgverlag" value="{{verlag.verlag}}">
+        	  <label>Stand</label>
+            <input placeholder="Stand" type="text" id="chgstand" value="{{verlag.stand}}">
+          </div>          
+        </div>
+        <div class="chg">
+          <div class="black ui button">          
+            Ändern
+          </div>
+        </div>  
+        <div class="del">
+          <div class="negative ui button">          
+            Löschen
+          </div>
+        </div>        
+      </form>        
+</template>

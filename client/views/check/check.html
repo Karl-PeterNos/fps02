@@ -1,0 +1,59 @@
+<template name="check">    
+{{#if isInRole 'admin'}}
+<div class="ui list">    
+    <div class="ui attached segment">
+        ToDo
+        <div class="item"> Suche </div>
+        <div class="item"> Filter auf neue Noten </div>
+        <div class="item"> Filter auf verdächtige </div>
+        <div class="item"> Filter auf geblockte </div>
+        <div class="item"> Delta Extrakt </div>
+        <div class="item"> Endstand Extrakt </div>
+    </div>
+    <div class="ui attached segment">
+        <table class="ui sortable table segment">
+            <thead>
+                <tr>
+                    <th>Status</th>                                 
+                    <th>ScoutId</th>     
+                    <th>Scout</th>                                                         
+                    <th>Nation</th>                    
+                    <th>Spiel</th>                           
+                    <th>Note</th>
+                    <th>Zeitstempel</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each note}}{{#with joinWithScoutSpiel}}           
+                <tr>                               
+                    {{#if editing}}         
+                        {{> wertungsStatusAendern}}  
+                    {{else}}
+                        <td><i class="{{wertungsStatus}}"></i>{{wertungsStatus}}</td>     
+                    {{/if}}                    
+                    <td><i class="{{scoutStatusIcon}}"></i>{{scoutId}}</td>
+                    <td>{{username}}</td>                                  
+                    <td>{{scoutLand}}</td>             
+                    <td>{{spiel}}</td>                    
+                    <td>{{schulNote}}</td>                                   
+                    <td>{{noteChangedAt}}</td>
+                </tr>
+                {{/with}}{{/each}}        
+            </tbody>
+        </table>
+    </div>
+</div>
+{{/if}}
+</template>
+<template name="wertungsStatusAendern">
+    <td>
+        <div class="ui dropdown">
+            <div class="text">{{wertungsStatus}}</div>
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                <div class="item" data-value="ok">ok</div>
+                <div class="item" data-value="blk">blockiert</div>
+            </div>
+        </div>
+    </td>
+</template>

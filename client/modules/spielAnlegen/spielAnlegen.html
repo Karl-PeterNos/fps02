@@ -1,0 +1,39 @@
+<template name="spielAnlegen">
+<!-- 	  <div class="ui small form segment">
+  		<div class="two fields">
+    		<div class="field">
+      			<label>Neuer Verlag</label>
+      			<input placeholder="Verlag" type="text" id="verlag">
+    		</div>	 		
+			<div class="field">
+    			<label>Stand</label>
+    			<input placeholder="Stand" type="text" id="stand">
+    		</div>    		
+    		<input id="ANLEGEN" type="submit" class="ui blue small submit button" value="Anlegen" >
+    	</div>  	
+  	</div>	 -->
+    <form>
+      <div class="ui small form segment">        
+          <label>Neues Spiel</label>
+          <input placeholder="Spiel" type="text" id="neuspiel">
+          <label>Verlag</label>          
+          {{> inputAutocomplete settings=settings id="neuverlag" class="form-control" name="neuverlag" placeholder="Verlag"}}
+      	  <label>Autor</label>
+          <input placeholder="Autor" type="text" id="neuautor">       
+          <label>Quote</label>
+          <input placeholder="Quote" type="text" id="neuquote">  
+          <label>Wertung (aktiv, erfolg, niete, inaktiv, space)</label>
+          <input placeholder="Wertung" type="text" id="neuwertung" value="aktiv">            
+      </div>    
+      <div class="cre">
+        <div class="positive ui button">          
+          Anlegen
+        </div>
+      </div>
+    </form>
+</template>
+
+
+<template name="verlagPick">
+{{type}} <small class="muted">{{verlag}}</small>
+</template>

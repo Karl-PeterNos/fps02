@@ -1,0 +1,50 @@
+<template name="spielImport">
+<br/>
+<p>
+  <div class="ui toggle checkbox">
+    <input name="echtUpload" type="checkbox" >
+    <label>Echtlauf</label>    
+  </div>
+</p>
+<p>
+  <div class="ui toggle checkbox">
+    <input name="fullUpload" type="checkbox" >
+    <label>Alle Spiele vor Upload Löschen</label>    
+  </div>
+</p>
+<p>
+<div class="ui form">
+    <div class="grouped inline fields">
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input name="semSepUpload" value="komma" checked="checked" type="radio">
+          <label>Komma</label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui radio checkbox">
+          <input name="semSepUpload" value="semikolion" type="radio">
+          <label>Semikolion</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</p>
+<p>
+  <input type="file" id="spielFiles" name="spielFiles[]" multiple />
+</p>
+  <div class="ui list">
+		{{#each spieleUpload}}            
+                <div class="ui attached segment">
+                <div class="item">
+                    <div class="content">
+                        <div class="header">{{spiel}}</div>
+                        <div class="description">
+                            Verlag:{{verlag}}, Autor:{{autor}}, Quote:{{quote}}:10
+                        </div>
+                    </div>
+                </div>         
+                </div>
+    	{{/each}}    
+    </div>   
+</template>

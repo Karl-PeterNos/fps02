@@ -1,0 +1,62 @@
+<template name="noten">
+    {{> notensuche}}  
+	<div class="ui list">
+		{{#each spiele}}
+            <div class="ui attached segment">
+                <div class="item">
+                    <div class="content">                        
+                        <div class="header">
+                            {{#if currentUser}}                            
+                                {{#with joinWithNote}}                                                    
+                                    {{#if editing}}
+                                        {{> wertung}}  
+                                    {{else}}             
+                                        <i class="{{userWishIcon}}"></i>                            
+                                        {{#if isInRole 'scout'}}
+                                            <i class="{{rbt 1}}"></i>
+                                            <i class="{{rbt 2}}"></i>
+                                            <i class="{{rbt 3}}"></i>
+                                            <i class="{{rbt 4}}"></i>
+                                            <i class="{{rbt 5}}"></i>
+                                            <i class="{{rbt 6}}"></i> 
+                                        {{/if}}
+                                    {{/if}}
+                                {{/with}}            
+                            {{/if}}     
+                            {{spiel}}
+                        </div>
+                        <div class="description">
+                            {{verlag}}, {{autor}}
+                        </div>                        
+                    </div>
+                </div>         
+            </div>          	
+    	{{/each}}    
+    </div>    
+</template>
+
+<template name="notensuche">
+    <div class="notenSuche">
+        <div class="ui input focus">
+            <input placeholder="Filter ..." class="search-query" type="text" id="notenFilter"> 
+        </div>
+    </div>
+</template>
+
+<template name="wertung">
+    
+            <i class="large {{userWishIcon}}" id="userWish"></i>
+
+    {{#if isInRole 'scout'}}
+        <div class="ui huge star rating"
+            id="noten-rating"
+              data-rating="{{note}}">
+            <i class="icon" title="ungenügend"></i>
+            <i class="icon" title="mangelhaft"></i>
+            <i class="icon" title="ausreichend"></i>
+            <i class="icon" title="befriedigend"></i>
+            <i class="icon" title="gut"></i>
+            <i class="icon" title="sehr gut"></i>
+        </div>  
+    {{/if}}            
+</template>

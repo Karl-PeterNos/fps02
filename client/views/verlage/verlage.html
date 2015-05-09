@@ -1,0 +1,32 @@
+<template name="verlage">
+{{#if isInRole 'admin'}}
+	<div class="ui list">
+		{{#each verlage}}
+            {{#if active}}
+    			<div class="ui attached inverted segment">
+                    <div class="item">
+    	       			<div class="content">
+        		      		<div class="header">{{verlag}}</div>
+        			     	{{stand}}
+        			    </div>
+      			    </div> 
+                </div> 
+            {{else}}
+                <div class="ui attached segment">
+                <div class="item">
+                    <div class="content">
+                        <div class="header">{{verlag}}</div>
+                        <div class="description">{{stand}}</div>
+                    </div>
+                </div>         
+                </div>
+            {{/if}}             	
+    	{{/each}}    
+    </div>    
+    {{#if get_active}}
+        {{> verlagAendern}}
+    {{/if}}        
+    {{> verlagAnlegen}}
+    {{> verlagImport}}
+{{/if}}    
+</template>
