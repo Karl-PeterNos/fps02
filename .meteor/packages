@@ -5,15 +5,23 @@
 
 standard-app-packages
 less
-jquery
 underscore
-accounts-password
-accounts-ui
 aldeed:collection2
-mrt:iron-router-progress
 iron:router
 raix:handlebar-helpers
 nooitaf:semantic-ui
-velocity:html-reporter
-mike:mocha
+jquery
+mizzao:autocomplete
+mrt:jquery-csv
+meteorhacks:fast-render
+accounts-ui
+ground:db
+alanning:roles
+accounts-facebook
+accounts-google
+accounts-twitter
+accounts-password
+mrt:jquery-ui-sortable
 
+multiply:iron-router-progress
+service-configuration
